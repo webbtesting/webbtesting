@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>replace</title>
+    </head>
+    <body>
+
+        <textarea rows="10" cols="50" placeholder="This is the default text" id="text"></textarea>
+        <br><br>
+        <input type="submit" value="Submit" onclick="myFunction()"> 
+        
+        <div width="100%">
+            <p id='output' style='word-wrap: break-word'></p>
+        </div>
+        
+        <button onclick="copyText()">Copy text</button>
+    
+    </body>
+    <script>
+
+        function myFunction() {
+            let at = document.getElementById("text").value;
+            let arr = at.split('');
+            let prevIndex = 0;
+
+            while (prevIndex != -1) {
+                console.log(prevIndex);
+                prevIndex = arr.indexOf("★", prevIndex+2);
+                if (prevIndex != -1) {
+                    arr.splice(prevIndex, 0, "&lt;br&gt;");
+                }
+            }
+
+            let final = arr.join('');
+            console.log(arr);
+
+            var out = document.getElementById('output').innerHTML = final;
+        }
+
+        function copyText() {
+            var text = document.getElementById('output').innerText;
+            var elem = document.createElement("textarea");
+            document.body.appendChild(elem);
+            elem.value = text;
+            elem.select();
+            document.execCommand("copy");
+            document.body.removeChild(elem);
+        }
+
+    </script>
+</html>
